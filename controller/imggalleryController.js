@@ -1,6 +1,7 @@
 const fsPromise = require('fs').promises;
 const path = require('path');
 const {format} = require('date-fns');
+var pathsUrl = "https://port7070-5grg9.ondigitalocean.app/";
 
 
 const imgallery = {
@@ -59,7 +60,7 @@ const imgGalleryAdd = async (req , res) => {
     const imgid = imgallery.list.length > 0 ? imgallery.list[imgallery.list.length-1].imgid +1 : 1;
     let newObjs = {};
     newObjs["imgid"] = imgid;
-    newObjs["src"] = "http://localhost:7070/gallery/"+req.file.filename;
+    newObjs["src"] =  pathsUrl+"gallery/"+req.file.filename;
     newObjs["name"] = req.body.name;
     newObjs["des"] = req.body.des;
     newObjs["size"] =  JSON.parse(req.body.size);
@@ -93,7 +94,7 @@ const imgGalleryUpdate = async (req , res) => {
     if(findData === undefined) res.json({code:7 , msg:"Data not Update"});
     let newObjs = {};
     newObjs["imgid"] = parseInt(paramID);
-    newObjs["src"] =  req.file !== undefined ?  "http://localhost:7070/gallery/"+req.file.filename : findData.src ;
+    newObjs["src"] =  req.file !== undefined ?  pathsUrl+"gallery/"+req.file.filename : findData.src ;
     newObjs["name"] = req.body.name;
     newObjs["des"] = req.body.des;
     newObjs["size"] =  JSON.parse(req.body.size);
